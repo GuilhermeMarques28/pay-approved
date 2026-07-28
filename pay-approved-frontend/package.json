@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "oxlint .",
+    "format": "oxfmt --write",
     "typecheck": "tsc --noEmit",
     "postinstall": "npx nativewind init",
     "prepare": "npx patch-package"
@@ -45,6 +46,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.0",
     "@types/react": "~19.2.10",
+    "oxfmt": "^0.61.0",
     "typescript": "~5.4.0"
   },
   "private": true

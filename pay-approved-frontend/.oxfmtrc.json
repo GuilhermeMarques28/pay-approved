@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
+  "singleQuote": true,
+  "jsxSingleQuote": false,
+  "trailingComma": "es5",
+  "printWidth": 120,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "node_modules/**",
+    "android/**",
+    "ios/**",
+    "dist/**",
+    "coverage/**",
+    ".expo/**",
+    "packages/**",
+    "yarn.lock"
+  ]
+}

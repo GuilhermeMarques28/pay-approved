@@ -20,17 +20,23 @@ export function PaymentAlertsScreen() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'paid': return '#16a34a';
-      case 'overdue': return '#dc2626';
-      default: return '#f59e0b';
+      case 'paid':
+        return '#16a34a';
+      case 'overdue':
+        return '#dc2626';
+      default:
+        return '#f59e0b';
     }
   };
 
   const getStatusIcon = (status: string) => {
     switch (status) {
-      case 'paid': return 'checkmark-circle';
-      case 'overdue': return 'alert-circle';
-      default: return 'time';
+      case 'paid':
+        return 'checkmark-circle';
+      case 'overdue':
+        return 'alert-circle';
+      default:
+        return 'time';
     }
   };
 
@@ -79,11 +85,24 @@ const styles = StyleSheet.create({
   loading: { textAlign: 'center', marginTop: 40, color: '#6b7280' },
   emptyState: { alignItems: 'center', marginTop: 40 },
   emptyText: { marginTop: 12, color: '#9ca3af', fontSize: 14 },
-  alertCard: { backgroundColor: '#f9fafb', borderRadius: 8, padding: 16, marginBottom: 12, borderLeftWidth: 4, borderLeftColor: '#f59e0b' },
+  alertCard: {
+    backgroundColor: '#f9fafb',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 12,
+    borderLeftWidth: 4,
+    borderLeftColor: '#f59e0b',
+  },
   alertHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 8, gap: 8 },
   alertTitle: { fontSize: 16, fontWeight: '600', color: '#1f2937' },
   alertMessage: { fontSize: 13, color: '#4b5563', marginBottom: 12 },
-  alertFooter: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 },
+  alertFooter: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
   alertDate: { fontSize: 12, color: '#6b7280' },
   alertAmount: { fontSize: 14, fontWeight: 'bold', color: '#1f2937' },
   alertStatus: { fontSize: 12, fontWeight: '600', textTransform: 'uppercase' },

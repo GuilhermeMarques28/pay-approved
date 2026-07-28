@@ -47,7 +47,9 @@ export function DocumentUploadScreen() {
           <View key={doc.id} style={styles.documentCard}>
             <View style={styles.documentInfo}>
               <Text style={styles.documentName}>{doc.name}</Text>
-              <Text style={styles.documentMeta}>Tipo: {doc.type} | Status: {doc.status}</Text>
+              <Text style={styles.documentMeta}>
+                Tipo: {doc.type} | Status: {doc.status}
+              </Text>
             </View>
             <View style={styles.documentActions}>
               <TouchableOpacity onPress={() => shareDocument(doc)}>
@@ -68,7 +70,17 @@ const styles = StyleSheet.create({
   uploadButton: { backgroundColor: '#2563eb', padding: 16, borderRadius: 8, alignItems: 'center', marginBottom: 24 },
   uploadButtonText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
   loading: { textAlign: 'center', color: '#6b7280', marginTop: 20 },
-  documentCard: { backgroundColor: '#f9fafb', borderRadius: 8, padding: 16, marginBottom: 12, borderWidth: 1, borderColor: '#e5e7eb', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  documentCard: {
+    backgroundColor: '#f9fafb',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   documentInfo: { flex: 1 },
   documentName: { fontSize: 14, fontWeight: '600', color: '#1f2937' },
   documentMeta: { fontSize: 12, color: '#6b7280', marginTop: 4 },

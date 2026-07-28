@@ -18,11 +18,7 @@ export function AppProviders({ children }: AppProvidersProps) {
       <ErrorBoundary FallbackComponent={MainErrorFallback}>
         <QueryClientProvider client={queryClient}>
           <SafeAreaProvider>
-            <SafeAreaListener
-              onChange={({ insets }) => Uniwind.updateInsets(insets)}
-            >
-              {children}
-            </SafeAreaListener>
+            <SafeAreaListener onChange={({ insets }) => Uniwind.updateInsets(insets)}>{children}</SafeAreaListener>
           </SafeAreaProvider>
         </QueryClientProvider>
       </ErrorBoundary>

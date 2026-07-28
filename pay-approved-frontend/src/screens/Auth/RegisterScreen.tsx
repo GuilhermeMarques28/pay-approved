@@ -39,19 +39,49 @@ export function RegisterScreen({ onRegister, onNavigateToLogin }: RegisterScreen
         <Text style={styles.title}>Pay Approved</Text>
         <Text style={styles.subtitle}>Crie sua conta</Text>
 
-        <TextInput style={styles.input} placeholder="Nome completo" value={control._formValues?.name ?? ''} onChangeText={(text) => control.setValue('name', text)} />
+        <TextInput
+          style={styles.input}
+          placeholder="Nome completo"
+          value={control._formValues?.name ?? ''}
+          onChangeText={(text) => control.setValue('name', text)}
+        />
         {errors.name && <Text style={styles.error}>{errors.name.message}</Text>}
 
-        <TextInput style={styles.input} placeholder="E-mail" keyboardType="email-address" autoCapitalize="none" value={control._formValues?.email ?? ''} onChangeText={(text) => control.setValue('email', text)} />
+        <TextInput
+          style={styles.input}
+          placeholder="E-mail"
+          keyboardType="email-address"
+          autoCapitalize="none"
+          value={control._formValues?.email ?? ''}
+          onChangeText={(text) => control.setValue('email', text)}
+        />
         {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
 
-        <TextInput style={styles.input} placeholder="CPF" keyboardType="numeric" value={control._formValues?.cpf ?? ''} onChangeText={(text) => control.setValue('cpf', text)} />
+        <TextInput
+          style={styles.input}
+          placeholder="CPF"
+          keyboardType="numeric"
+          value={control._formValues?.cpf ?? ''}
+          onChangeText={(text) => control.setValue('cpf', text)}
+        />
         {errors.cpf && <Text style={styles.error}>{errors.cpf.message}</Text>}
 
-        <TextInput style={styles.input} placeholder="Telefone" keyboardType="phone-pad" value={control._formValues?.phone ?? ''} onChangeText={(text) => control.setValue('phone', text)} />
+        <TextInput
+          style={styles.input}
+          placeholder="Telefone"
+          keyboardType="phone-pad"
+          value={control._formValues?.phone ?? ''}
+          onChangeText={(text) => control.setValue('phone', text)}
+        />
         {errors.phone && <Text style={styles.error}>{errors.phone.message}</Text>}
 
-        <TextInput style={styles.input} placeholder="Senha" secureTextEntry value={control._formValues?.password ?? ''} onChangeText={(text) => control.setValue('password', text)} />
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          secureTextEntry
+          value={control._formValues?.password ?? ''}
+          onChangeText={(text) => control.setValue('password', text)}
+        />
         {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
 
         <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmit)} disabled={isSubmitting}>

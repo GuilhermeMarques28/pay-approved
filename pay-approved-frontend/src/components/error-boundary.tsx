@@ -28,11 +28,7 @@ export class MainErrorFallback extends React.Component<
 }
 
 export function ErrorBoundary({ children }: ErrorBoundaryProps) {
-  return (
-    <React.ErrorBoundary FallbackComponent={MainErrorFallback as any}>
-      {children}
-    </React.ErrorBoundary>
-  );
+  return <React.ErrorBoundary FallbackComponent={MainErrorFallback as any}>{children}</React.ErrorBoundary>;
 }
 
 const styles = StyleSheet.create({

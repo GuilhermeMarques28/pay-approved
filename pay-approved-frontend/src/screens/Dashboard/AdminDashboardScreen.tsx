@@ -56,11 +56,23 @@ export function AdminDashboardScreen() {
                 <Text style={styles.customerName}>{contract.customerName}</Text>
                 <Text style={styles.customerEmail}>{contract.customerEmail}</Text>
               </View>
-              <Text style={[styles.contractStatus, { color: contract.status === 'active' ? '#16a34a' : contract.status === 'overdue' ? '#dc2626' : '#6b7280' }]}>{contract.status}</Text>
+              <Text
+                style={[
+                  styles.contractStatus,
+                  {
+                    color:
+                      contract.status === 'active' ? '#16a34a' : contract.status === 'overdue' ? '#dc2626' : '#6b7280',
+                  },
+                ]}
+              >
+                {contract.status}
+              </Text>
             </View>
             <View style={styles.contractDetails}>
               <Text style={styles.contractDetail}>Contrato: {contract.contractName}</Text>
-              <Text style={styles.contractDetail}>R$ {contract.totalAmount.toFixed(2)} | {contract.paidInstallments}/{contract.installments} parcelas</Text>
+              <Text style={styles.contractDetail}>
+                R$ {contract.totalAmount.toFixed(2)} | {contract.paidInstallments}/{contract.installments} parcelas
+              </Text>
               <Text style={styles.contractDetail}>Próximo vencimento: {contract.nextDueDate}</Text>
               <Text style={styles.contractDetail}>Documentos: {contract.documents}</Text>
             </View>
@@ -83,12 +95,27 @@ const styles = StyleSheet.create({
   container: { padding: 24, paddingBottom: 40 },
   title: { fontSize: 24, fontWeight: 'bold', marginBottom: 24, color: '#1e3a8a' },
   statsGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginBottom: 24 },
-  statCard: { backgroundColor: '#f9fafb', borderRadius: 12, padding: 16, width: '48%', alignItems: 'center', borderWidth: 1, borderColor: '#e5e7eb' },
+  statCard: {
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    padding: 16,
+    width: '48%',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
   statValue: { fontSize: 20, fontWeight: 'bold', color: '#1f2937', marginTop: 8 },
   statLabel: { fontSize: 12, color: '#6b7280', marginTop: 4 },
   sectionTitle: { fontSize: 18, fontWeight: 'bold', marginBottom: 16, color: '#1e3a8a' },
   emptyText: { textAlign: 'center', color: '#9ca3af', marginTop: 20 },
-  contractCard: { backgroundColor: '#f9fafb', borderRadius: 8, padding: 16, marginBottom: 12, borderWidth: 1, borderColor: '#e5e7eb' },
+  contractCard: {
+    backgroundColor: '#f9fafb',
+    borderRadius: 8,
+    padding: 16,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
+  },
   contractHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 8 },
   customerName: { fontSize: 15, fontWeight: '600', color: '#1f2937' },
   customerEmail: { fontSize: 12, color: '#6b7280' },

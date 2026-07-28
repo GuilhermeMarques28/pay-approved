@@ -23,8 +23,7 @@ const config: ExpoConfig = {
       {
         locationAlwaysAndWhenInUsePermission:
           'O Pay Approved precisa da sua localização para enviar alertas de pagamento.',
-        locationWhenInUsePermission:
-          'O Pay Approved precisa da sua localização para enviar alertas de pagamento.',
+        locationWhenInUsePermission: 'O Pay Approved precisa da sua localização para enviar alertas de pagamento.',
       },
     ],
     'expo-notifications',
