@@ -52,28 +52,73 @@ export function CustomerRegistrationScreen({ onSubmit }: CustomerRegistrationScr
       <Text style={styles.title}>Cadastro do Cliente</Text>
       <Text style={styles.subtitle}>Preencha seus dados para continuar</Text>
 
-      <TextInput style={styles.input} placeholder="Nome completo" value={control._formValues?.name ?? ''} onChangeText={(text) => control.setValue('name', text)} />
+      <TextInput
+        style={styles.input}
+        placeholder="Nome completo"
+        value={control._formValues?.name ?? ''}
+        onChangeText={(text) => control.setValue('name', text)}
+      />
       {errors.name && <Text style={styles.error}>{errors.name.message}</Text>}
 
-      <TextInput style={styles.input} placeholder="E-mail" keyboardType="email-address" autoCapitalize="none" value={control._formValues?.email ?? ''} onChangeText={(text) => control.setValue('email', text)} />
+      <TextInput
+        style={styles.input}
+        placeholder="E-mail"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        value={control._formValues?.email ?? ''}
+        onChangeText={(text) => control.setValue('email', text)}
+      />
       {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
 
-      <TextInput style={styles.input} placeholder="CPF" keyboardType="numeric" value={control._formValues?.cpf ?? ''} onChangeText={(text) => control.setValue('cpf', text)} />
+      <TextInput
+        style={styles.input}
+        placeholder="CPF"
+        keyboardType="numeric"
+        value={control._formValues?.cpf ?? ''}
+        onChangeText={(text) => control.setValue('cpf', text)}
+      />
       {errors.cpf && <Text style={styles.error}>{errors.cpf.message}</Text>}
 
-      <TextInput style={styles.input} placeholder="Telefone" keyboardType="phone-pad" value={control._formValues?.phone ?? ''} onChangeText={(text) => control.setValue('phone', text)} />
+      <TextInput
+        style={styles.input}
+        placeholder="Telefone"
+        keyboardType="phone-pad"
+        value={control._formValues?.phone ?? ''}
+        onChangeText={(text) => control.setValue('phone', text)}
+      />
       {errors.phone && <Text style={styles.error}>{errors.phone.message}</Text>}
 
-      <TextInput style={styles.input} placeholder="Endereço" value={control._formValues?.address ?? ''} onChangeText={(text) => control.setValue('address', text)} />
+      <TextInput
+        style={styles.input}
+        placeholder="Endereço"
+        value={control._formValues?.address ?? ''}
+        onChangeText={(text) => control.setValue('address', text)}
+      />
       {errors.address && <Text style={styles.error}>{errors.address.message}</Text>}
 
-      <TextInput style={styles.input} placeholder="Cidade" value={control._formValues?.city ?? ''} onChangeText={(text) => control.setValue('city', text)} />
+      <TextInput
+        style={styles.input}
+        placeholder="Cidade"
+        value={control._formValues?.city ?? ''}
+        onChangeText={(text) => control.setValue('city', text)}
+      />
       {errors.city && <Text style={styles.error}>{errors.city.message}</Text>}
 
-      <TextInput style={styles.input} placeholder="Estado" value={control._formValues?.state ?? ''} onChangeText={(text) => control.setValue('state', text)} />
+      <TextInput
+        style={styles.input}
+        placeholder="Estado"
+        value={control._formValues?.state ?? ''}
+        onChangeText={(text) => control.setValue('state', text)}
+      />
       {errors.state && <Text style={styles.error}>{errors.state.message}</Text>}
 
-      <TextInput style={styles.input} placeholder="CEP" keyboardType="numeric" value={control._formValues?.zipCode ?? ''} onChangeText={(text) => control.setValue('zipCode', text)} />
+      <TextInput
+        style={styles.input}
+        placeholder="CEP"
+        keyboardType="numeric"
+        value={control._formValues?.zipCode ?? ''}
+        onChangeText={(text) => control.setValue('zipCode', text)}
+      />
       {errors.zipCode && <Text style={styles.error}>{errors.zipCode.message}</Text>}
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit(onSubmitForm)} disabled={isSubmitting}>

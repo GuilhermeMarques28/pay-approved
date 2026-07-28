@@ -19,7 +19,11 @@ function ContractStackNavigator() {
   return (
     <ContractStack.Navigator screenOptions={{ headerShown: true }}>
       <ContractStack.Screen name="ContractList" component={ContractSigningScreen} options={{ title: 'Contratos' }} />
-      <ContractStack.Screen name="ContractDetail" component={ContractSigningScreen} options={{ title: 'Detalhes do Contrato' }} />
+      <ContractStack.Screen
+        name="ContractDetail"
+        component={ContractSigningScreen}
+        options={{ title: 'Detalhes do Contrato' }}
+      />
     </ContractStack.Navigator>
   );
 }
@@ -28,7 +32,11 @@ function DocumentStackNavigator() {
   return (
     <DocumentStack.Navigator screenOptions={{ headerShown: true }}>
       <DocumentStack.Screen name="DocumentList" component={DocumentUploadScreen} options={{ title: 'Documentos' }} />
-      <DocumentStack.Screen name="DocumentDetail" component={DocumentUploadScreen} options={{ title: 'Detalhes do Documento' }} />
+      <DocumentStack.Screen
+        name="DocumentDetail"
+        component={DocumentUploadScreen}
+        options={{ title: 'Detalhes do Documento' }}
+      />
     </DocumentStack.Navigator>
   );
 }

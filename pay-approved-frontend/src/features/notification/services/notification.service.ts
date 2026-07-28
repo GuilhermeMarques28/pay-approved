@@ -6,11 +6,7 @@ export async function requestNotificationPermission(): Promise<boolean> {
   return status === 'granted';
 }
 
-export async function schedulePaymentAlert(
-  title: string,
-  body: string,
-  date: Date
-): Promise<void> {
+export async function schedulePaymentAlert(title: string, body: string, date: Date): Promise<void> {
   await Notifications.scheduleNotificationAsync({
     content: {
       title,
