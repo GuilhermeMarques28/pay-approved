@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import * as Location from 'expo-location';
+import { useNavigation } from '@react-navigation/native';
 
 const customerSchema = yup.object({
   name: yup.string().required('Nome é obrigatório'),
@@ -18,19 +19,27 @@ const customerSchema = yup.object({
 
 type CustomerFormData = yup.InferType<typeof customerSchema>;
 
-interface CustomerRegistrationScreenProps {
-  onSubmit: (data: CustomerFormData) => Promise<void>;
-}
-
-export function CustomerRegistrationScreen({ onSubmit }: CustomerRegistrationScreenProps) {
+export function CustomerRegistrationScreen() {
+  const navigation = useNavigation();
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
+    watch,
   } = useForm<CustomerFormData>({
     resolver: yupResolver(customerSchema),
     defaultValues: { name: '', email: '', cpf: '', phone: '', address: '', city: '', state: '', zipCode: '' },
   });
+
+  const name = watch('name');
+  const email = watch('email');
+  const cpf = watch('cpf');
+  const phone = watch('phone');
+  const address = watch('address');
+  const city = watch('city');
+  const state = watch('state');
+  const zipCode = watch('zipCode');
 
   const requestLocation = async () => {
     const { status } = await Location.requestForegroundPermissionsAsync();
@@ -44,7 +53,8 @@ export function CustomerRegistrationScreen({ onSubmit }: CustomerRegistrationScr
 
   const onSubmitForm = async (data: CustomerFormData) => {
     await requestLocation();
-    await onSubmit(data);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    navigation.goBack();
   };
 
   return (
@@ -55,8 +65,8 @@ export function CustomerRegistrationScreen({ onSubmit }: CustomerRegistrationScr
       <TextInput
         style={styles.input}
         placeholder="Nome completo"
-        value={control._formValues?.name ?? ''}
-        onChangeText={(text) => control.setValue('name', text)}
+        value={name}
+        onChangeText={(text) => setValue('name', text)}
       />
       {errors.name && <Text style={styles.error}>{errors.name.message}</Text>}
 
@@ -65,8 +75,8 @@ export function CustomerRegistrationScreen({ onSubmit }: CustomerRegistrationScr
         placeholder="E-mail"
         keyboardType="email-address"
         autoCapitalize="none"
-        value={control._formValues?.email ?? ''}
-        onChangeText={(text) => control.setValue('email', text)}
+        value={email}
+        onChangeText={(text) => setValue('email', text)}
       />
       {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
 
@@ -74,8 +84,8 @@ export function CustomerRegistrationScreen({ onSubmit }: CustomerRegistrationScr
         style={styles.input}
         placeholder="CPF"
         keyboardType="numeric"
-        value={control._formValues?.cpf ?? ''}
-        onChangeText={(text) => control.setValue('cpf', text)}
+        value={cpf}
+        onChangeText={(text) => setValue('cpf', text)}
       />
       {errors.cpf && <Text style={styles.error}>{errors.cpf.message}</Text>}
 
@@ -83,32 +93,32 @@ export function CustomerRegistrationScreen({ onSubmit }: CustomerRegistrationScr
         style={styles.input}
         placeholder="Telefone"
         keyboardType="phone-pad"
-        value={control._formValues?.phone ?? ''}
-        onChangeText={(text) => control.setValue('phone', text)}
+        value={phone}
+        onChangeText={(text) => setValue('phone', text)}
       />
       {errors.phone && <Text style={styles.error}>{errors.phone.message}</Text>}
 
       <TextInput
         style={styles.input}
         placeholder="Endereço"
-        value={control._formValues?.address ?? ''}
-        onChangeText={(text) => control.setValue('address', text)}
+        value={address}
+        onChangeText={(text) => setValue('address', text)}
       />
       {errors.address && <Text style={styles.error}>{errors.address.message}</Text>}
 
       <TextInput
         style={styles.input}
         placeholder="Cidade"
-        value={control._formValues?.city ?? ''}
-        onChangeText={(text) => control.setValue('city', text)}
+        value={city}
+        onChangeText={(text) => setValue('city', text)}
       />
       {errors.city && <Text style={styles.error}>{errors.city.message}</Text>}
 
       <TextInput
         style={styles.input}
         placeholder="Estado"
-        value={control._formValues?.state ?? ''}
-        onChangeText={(text) => control.setValue('state', text)}
+        value={state}
+        onChangeText={(text) => setValue('state', text)}
       />
       {errors.state && <Text style={styles.error}>{errors.state.message}</Text>}
 
@@ -116,8 +126,8 @@ export function CustomerRegistrationScreen({ onSubmit }: CustomerRegistrationScr
         style={styles.input}
         placeholder="CEP"
         keyboardType="numeric"
-        value={control._formValues?.zipCode ?? ''}
-        onChangeText={(text) => control.setValue('zipCode', text)}
+        value={zipCode}
+        onChangeText={(text) => setValue('zipCode', text)}
       />
       {errors.zipCode && <Text style={styles.error}>{errors.zipCode.message}</Text>}
 

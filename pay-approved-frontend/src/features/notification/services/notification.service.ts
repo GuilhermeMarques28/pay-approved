@@ -13,7 +13,7 @@ export async function schedulePaymentAlert(title: string, body: string, date: Da
       body,
       data: { type: 'payment_alert' },
     },
-    trigger: date,
+    trigger: { type: 'date', date } as Notifications.NotificationTriggerInput,
   });
 }
 

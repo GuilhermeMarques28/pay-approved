@@ -31,10 +31,10 @@ export const linking: LinkingOptions<RootStackParamList> = {
     const url = await Linking.getInitialURL();
     return url;
   },
-  subscribe: (callback: (url: string | null) => void) => {
-    const listener = Linking.addEventListener('url', ({ url }) => {
-      callback(url);
+  subscribe: (listener: (url: string) => void) => {
+    const sub = Linking.addEventListener('url', ({ url }: { url: string }) => {
+      listener(url);
     });
-    return () => listener.remove();
+    return () => sub.remove();
   },
 };

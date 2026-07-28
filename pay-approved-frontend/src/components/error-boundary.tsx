@@ -1,34 +1,30 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { ErrorBoundary } from 'react-error-boundary';
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
 
-interface ErrorBoundaryState {
-  hasError: boolean;
-  error: Error | null;
+export function MainErrorFallback({ error, resetErrorBoundary }: { error: unknown; resetErrorBoundary: () => void }) {
+  const message = error instanceof Error ? error.message : 'Ocorreu um erro inesperado';
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Algo deu errado</Text>
+      <Text style={styles.message}>{message}</Text>
+      <TouchableOpacity style={styles.button} onPress={resetErrorBoundary}>
+        <Text style={styles.buttonText}>Tentar novamente</Text>
+      </TouchableOpacity>
+    </View>
+  );
 }
 
-export class MainErrorFallback extends React.Component<
-  ErrorBoundaryProps & { error: Error; resetErrorBoundary: () => void },
-  {}
-> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Algo deu errado</Text>
-        <Text style={styles.message}>{this.props.error.message}</Text>
-        <TouchableOpacity style={styles.button} onPress={this.props.resetErrorBoundary}>
-          <Text style={styles.buttonText}>Tentar novamente</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
-
-export function ErrorBoundary({ children }: ErrorBoundaryProps) {
-  return <React.ErrorBoundary FallbackComponent={MainErrorFallback as any}>{children}</React.ErrorBoundary>;
+export function AppErrorBoundary({ children }: ErrorBoundaryProps) {
+  return (
+    <ErrorBoundary FallbackComponent={MainErrorFallback}>
+      {children}
+    </ErrorBoundary>
+  );
 }
 
 const styles = StyleSheet.create({

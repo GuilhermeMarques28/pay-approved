@@ -3,6 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingVi
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@/features/auth/context/auth-context';
 
 const loginSchema = yup.object({
   email: yup.string().email('E-mail inválido').required('E-mail é obrigatório'),
@@ -11,23 +13,25 @@ const loginSchema = yup.object({
 
 type LoginFormData = yup.InferType<typeof loginSchema>;
 
-interface LoginScreenProps {
-  onLogin: (email: string, password: string) => void;
-  onNavigateToRegister: () => void;
-}
-
-export function LoginScreen({ onLogin, onNavigateToRegister }: LoginScreenProps) {
+export function LoginScreen() {
+  const navigation = useNavigation();
+  const { login } = useAuth();
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
+    watch,
   } = useForm<LoginFormData>({
     resolver: yupResolver(loginSchema),
     defaultValues: { email: '', password: '' },
   });
 
+  const email = watch('email');
+  const password = watch('password');
+
   const onSubmit = async (data: LoginFormData) => {
-    await onLogin(data.email, data.password);
+    await login(data.email, data.password);
   };
 
   return (
@@ -41,8 +45,8 @@ export function LoginScreen({ onLogin, onNavigateToRegister }: LoginScreenProps)
           placeholder="E-mail"
           keyboardType="email-address"
           autoCapitalize="none"
-          value={control._formValues?.email ?? ''}
-          onChangeText={(text) => control.setValue('email', text)}
+          value={email}
+          onChangeText={(text) => setValue('email', text)}
         />
         {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
 
@@ -50,8 +54,8 @@ export function LoginScreen({ onLogin, onNavigateToRegister }: LoginScreenProps)
           style={styles.input}
           placeholder="Senha"
           secureTextEntry
-          value={control._formValues?.password ?? ''}
-          onChangeText={(text) => control.setValue('password', text)}
+          value={password}
+          onChangeText={(text) => setValue('password', text)}
         />
         {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
 
@@ -59,7 +63,7 @@ export function LoginScreen({ onLogin, onNavigateToRegister }: LoginScreenProps)
           <Text style={styles.buttonText}>{isSubmitting ? 'Entrando...' : 'Entrar'}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={onNavigateToRegister}>
+        <TouchableOpacity onPress={() => navigation.navigate('Register' as never)}>
           <Text style={styles.link}>Não tem conta? Cadastre-se</Text>
         </TouchableOpacity>
       </View>

@@ -1,6 +1,6 @@
 import type { ExpoConfig } from '@expo/config-types';
 
-const config: ExpoConfig = {
+const config = {
   name: 'Pay Approved',
   slug: 'pay-approved',
   version: '1.0.0',
@@ -47,6 +47,6 @@ const config: ExpoConfig = {
   extra: {
     apiUrl: process.env.API_URL ?? 'http://localhost:3000',
   },
-};
+} as ExpoConfig;
 
 export default config;

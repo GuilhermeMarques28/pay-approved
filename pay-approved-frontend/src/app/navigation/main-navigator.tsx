@@ -47,7 +47,7 @@ export function MainNavigator() {
       screenOptions={({ route }) => ({
         headerShown: true,
         tabBarIcon: ({ focused, color, size }) => {
-          let iconName: string;
+          let iconName: string = 'help-outline';
           if (route.name === 'Dashboard') {
             iconName = focused ? 'home' : 'home-outline';
           } else if (route.name === 'Registration') {
@@ -59,7 +59,7 @@ export function MainNavigator() {
           } else if (route.name === 'Alerts') {
             iconName = focused ? 'notifications' : 'notifications-outline';
           }
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return <Ionicons name={iconName as any} size={size} color={color} />;
         },
         tabBarActiveTintColor: '#2563eb',
         tabBarInactiveTintColor: '#9ca3af',

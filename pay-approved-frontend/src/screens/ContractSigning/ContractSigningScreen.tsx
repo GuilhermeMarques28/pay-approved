@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import * as DocumentPicker from 'expo-document-picker';
+import { useNavigation } from '@react-navigation/native';
 
 const contractSchema = yup.object({
   contractName: yup.string().required('Nome do contrato é obrigatório'),
@@ -18,19 +19,23 @@ const contractSchema = yup.object({
 
 type ContractFormData = yup.InferType<typeof contractSchema>;
 
-interface ContractSigningScreenProps {
-  onSign: (data: ContractFormData) => Promise<void>;
-}
-
-export function ContractSigningScreen({ onSign }: ContractSigningScreenProps) {
+export function ContractSigningScreen() {
+  const navigation = useNavigation();
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
+    watch,
   } = useForm<ContractFormData>({
     resolver: yupResolver(contractSchema),
     defaultValues: { contractName: '', totalAmount: 0, installments: 1, dueDay: 1 },
   });
+
+  const contractName = watch('contractName');
+  const totalAmount = watch('totalAmount');
+  const installments = watch('installments');
+  const dueDay = watch('dueDay');
 
   const pickDocument = async () => {
     const result = await DocumentPicker.getDocumentAsync({ type: '*/*', copyToCacheDirectory: true });
@@ -40,7 +45,8 @@ export function ContractSigningScreen({ onSign }: ContractSigningScreenProps) {
   };
 
   const onSubmitForm = async (data: ContractFormData) => {
-    await onSign(data);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    navigation.goBack();
   };
 
   return (
@@ -51,8 +57,8 @@ export function ContractSigningScreen({ onSign }: ContractSigningScreenProps) {
       <TextInput
         style={styles.input}
         placeholder="Nome do contrato"
-        value={control._formValues?.contractName ?? ''}
-        onChangeText={(text) => control.setValue('contractName', text)}
+        value={contractName}
+        onChangeText={(text) => setValue('contractName', text)}
       />
       {errors.contractName && <Text style={styles.error}>{errors.contractName.message}</Text>}
 
@@ -60,8 +66,8 @@ export function ContractSigningScreen({ onSign }: ContractSigningScreenProps) {
         style={styles.input}
         placeholder="Valor total (R$)"
         keyboardType="numeric"
-        value={control._formValues?.totalAmount?.toString() ?? ''}
-        onChangeText={(text) => control.setValue('totalAmount', parseFloat(text) || 0)}
+        value={totalAmount?.toString() ?? ''}
+        onChangeText={(text) => setValue('totalAmount', parseFloat(text) || 0)}
       />
       {errors.totalAmount && <Text style={styles.error}>{errors.totalAmount.message}</Text>}
 
@@ -69,8 +75,8 @@ export function ContractSigningScreen({ onSign }: ContractSigningScreenProps) {
         style={styles.input}
         placeholder="Quantidade de parcelas"
         keyboardType="numeric"
-        value={control._formValues?.installments?.toString() ?? ''}
-        onChangeText={(text) => control.setValue('installments', parseInt(text) || 0)}
+        value={installments?.toString() ?? ''}
+        onChangeText={(text) => setValue('installments', parseInt(text, 10) || 0)}
       />
       {errors.installments && <Text style={styles.error}>{errors.installments.message}</Text>}
 
@@ -78,8 +84,8 @@ export function ContractSigningScreen({ onSign }: ContractSigningScreenProps) {
         style={styles.input}
         placeholder="Dia de vencimento (1-31)"
         keyboardType="numeric"
-        value={control._formValues?.dueDay?.toString() ?? ''}
-        onChangeText={(text) => control.setValue('dueDay', parseInt(text) || 1)}
+        value={dueDay?.toString() ?? ''}
+        onChangeText={(text) => setValue('dueDay', parseInt(text, 10) || 1)}
       />
       {errors.dueDay && <Text style={styles.error}>{errors.dueDay.message}</Text>}
 

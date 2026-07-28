@@ -3,6 +3,8 @@ import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingVi
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { useNavigation } from '@react-navigation/native';
+import { useAuth } from '@/features/auth/context/auth-context';
 
 const registerSchema = yup.object({
   name: yup.string().required('Nome é obrigatório'),
@@ -14,23 +16,28 @@ const registerSchema = yup.object({
 
 type RegisterFormData = yup.InferType<typeof registerSchema>;
 
-interface RegisterScreenProps {
-  onRegister: (data: RegisterFormData) => void;
-  onNavigateToLogin: () => void;
-}
-
-export function RegisterScreen({ onRegister, onNavigateToLogin }: RegisterScreenProps) {
+export function RegisterScreen() {
+  const navigation = useNavigation();
+  const { register: registerUser } = useAuth();
   const {
     control,
     handleSubmit,
     formState: { errors, isSubmitting },
+    setValue,
+    watch,
   } = useForm<RegisterFormData>({
     resolver: yupResolver(registerSchema),
     defaultValues: { name: '', email: '', cpf: '', phone: '', password: '' },
   });
 
+  const name = watch('name');
+  const email = watch('email');
+  const cpf = watch('cpf');
+  const phone = watch('phone');
+  const password = watch('password');
+
   const onSubmit = async (data: RegisterFormData) => {
-    await onRegister(data);
+    await registerUser(data);
   };
 
   return (
@@ -42,8 +49,8 @@ export function RegisterScreen({ onRegister, onNavigateToLogin }: RegisterScreen
         <TextInput
           style={styles.input}
           placeholder="Nome completo"
-          value={control._formValues?.name ?? ''}
-          onChangeText={(text) => control.setValue('name', text)}
+          value={name}
+          onChangeText={(text) => setValue('name', text)}
         />
         {errors.name && <Text style={styles.error}>{errors.name.message}</Text>}
 
@@ -52,8 +59,8 @@ export function RegisterScreen({ onRegister, onNavigateToLogin }: RegisterScreen
           placeholder="E-mail"
           keyboardType="email-address"
           autoCapitalize="none"
-          value={control._formValues?.email ?? ''}
-          onChangeText={(text) => control.setValue('email', text)}
+          value={email}
+          onChangeText={(text) => setValue('email', text)}
         />
         {errors.email && <Text style={styles.error}>{errors.email.message}</Text>}
 
@@ -61,8 +68,8 @@ export function RegisterScreen({ onRegister, onNavigateToLogin }: RegisterScreen
           style={styles.input}
           placeholder="CPF"
           keyboardType="numeric"
-          value={control._formValues?.cpf ?? ''}
-          onChangeText={(text) => control.setValue('cpf', text)}
+          value={cpf}
+          onChangeText={(text) => setValue('cpf', text)}
         />
         {errors.cpf && <Text style={styles.error}>{errors.cpf.message}</Text>}
 
@@ -70,8 +77,8 @@ export function RegisterScreen({ onRegister, onNavigateToLogin }: RegisterScreen
           style={styles.input}
           placeholder="Telefone"
           keyboardType="phone-pad"
-          value={control._formValues?.phone ?? ''}
-          onChangeText={(text) => control.setValue('phone', text)}
+          value={phone}
+          onChangeText={(text) => setValue('phone', text)}
         />
         {errors.phone && <Text style={styles.error}>{errors.phone.message}</Text>}
 
@@ -79,8 +86,8 @@ export function RegisterScreen({ onRegister, onNavigateToLogin }: RegisterScreen
           style={styles.input}
           placeholder="Senha"
           secureTextEntry
-          value={control._formValues?.password ?? ''}
-          onChangeText={(text) => control.setValue('password', text)}
+          value={password}
+          onChangeText={(text) => setValue('password', text)}
         />
         {errors.password && <Text style={styles.error}>{errors.password.message}</Text>}
 
@@ -88,7 +95,7 @@ export function RegisterScreen({ onRegister, onNavigateToLogin }: RegisterScreen
           <Text style={styles.buttonText}>{isSubmitting ? 'Cadastrando...' : 'Cadastrar'}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={onNavigateToLogin}>
+        <TouchableOpacity onPress={() => navigation.navigate('Login' as never)}>
           <Text style={styles.link}>Já tem conta? Faça login</Text>
         </TouchableOpacity>
       </View>
