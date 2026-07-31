@@ -8,8 +8,15 @@
     "start": "node dist/index.js",
     "dev": "tsx watch src/index.ts",
     "migrate": "psql -f migrations/001_schema.sql",
-    "lint": "eslint src/",
-    "typecheck": "tsc --noEmit"
+    "lint": "oxlint .",
+    "typecheck": "tsc --noEmit",
+    "postinstall": "sh scripts/setup-git-hooks.sh",
+    "setup:hooks": "sh scripts/setup-git-hooks.sh",
+    "lint:fix": "oxlint --fix .",
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "validate:commit": "npm run lint && npm run format:check",
+    "validate:push": "npm run typecheck"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
@@ -29,6 +36,8 @@
     "@types/multer": "^1.4.11",
     "@types/node": "^22.0.0",
     "@types/uuid": "^10.0.0",
+    "oxfmt": "^0.61.0",
+    "oxlint": "^1.76.0",
     "tsx": "^4.16.0",
     "typescript": "^5.7.0"
   }

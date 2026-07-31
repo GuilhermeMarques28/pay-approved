@@ -1,0 +1,78 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "env": {
+    "builtin": true,
+    "es2021": true,
+    "node": true
+  },
+  "ignorePatterns": [
+    "node_modules/**",
+    "dist/**",
+    "coverage/**",
+    ".githooks/**",
+    "scripts/**",
+    ".agents/**",
+    "migrations/**"
+  ],
+  "plugins": ["typescript", "import", "unicorn", "oxc"],
+  "rules": {
+    "@typescript-eslint/array-type": ["error", { "default": "array-simple" }],
+    "@typescript-eslint/ban-types": "error",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/dot-notation": "error",
+    "@typescript-eslint/explicit-member-accessibility": ["error", { "accessibility": "no-public" }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-shadow": "warn",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unused-expressions": "error",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/prefer-for-of": "error",
+    "@typescript-eslint/prefer-function-type": "error",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/triple-slash-reference": [
+      "error",
+      { "lib": "always", "path": "always", "types": "prefer-import" }
+    ],
+    "@typescript-eslint/unified-signatures": "error",
+    "arrow-body-style": "error",
+    "curly": "error",
+    "eqeqeq": ["error", "smart"],
+    "eslint/no-console": "warn",
+    "eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_",
+        "destructuredArrayIgnorePattern": "^_",
+        "ignoreRestSiblings": true,
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "guard-for-in": "error",
+    "id-match": "error",
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
+    "max-classes-per-file": ["error", 1],
+    "no-bitwise": "error",
+    "no-caller": "error",
+    "no-cond-assign": "error",
+    "no-debugger": "error",
+    "no-empty": "error",
+    "no-eval": "error",
+    "no-irregular-whitespace": "error",
+    "no-new-wrappers": "error",
+    "no-redeclare": "error",
+    "no-shadow": "off",
+    "no-throw-literal": "error",
+    "no-underscore-dangle": ["error", { "allow": ["__dirname", "__filename"] }],
+    "no-unsafe-finally": "error",
+    "no-unused-labels": "error",
+    "object-shorthand": "error",
+    "radix": "error",
+    "use-isnan": "error"
+  }
+}

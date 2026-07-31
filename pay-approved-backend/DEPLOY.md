@@ -49,14 +49,14 @@ Como o backend está em um subdiretório:
 
 No Railway, vá em **Variables** e adicione:
 
-| Variável | Valor |
-|---|---|
-| `SUPABASE_URL` | `https://seu-projeto.supabase.co` |
-| `SUPABASE_ANON_KEY` | Copie do Supabase Dashboard → Settings → API |
-| `SUPABASE_SERVICE_ROLE_KEY` | Copie do Supabase Dashboard → Settings → API |
-| `NODE_ENV` | `production` |
-| `ALLOWED_ORIGINS` | `https://seudominio.com,https://api.seudominio.com` |
-| `EXPO_PUSH_NOTIFICATION_API_KEY` | Sua chave Expo (se usar push notifications) |
+| Variável                         | Valor                                               |
+| -------------------------------- | --------------------------------------------------- |
+| `SUPABASE_URL`                   | `https://seu-projeto.supabase.co`                   |
+| `SUPABASE_ANON_KEY`              | Copie do Supabase Dashboard → Settings → API        |
+| `SUPABASE_SERVICE_ROLE_KEY`      | Copie do Supabase Dashboard → Settings → API        |
+| `NODE_ENV`                       | `production`                                        |
+| `ALLOWED_ORIGINS`                | `https://seudominio.com,https://api.seudominio.com` |
+| `EXPO_PUSH_NOTIFICATION_API_KEY` | Sua chave Expo (se usar push notifications)         |
 
 > ⚠️ **NÃO** configure `PORT` — o Railway injeta automaticamente.
 
@@ -102,8 +102,9 @@ curl https://api.seudominio.com/health
 ```
 
 Resposta esperada:
+
 ```json
-{"status":"ok","timestamp":"2026-07-30T12:00:00.000Z"}
+{ "status": "ok", "timestamp": "2026-07-30T12:00:00.000Z" }
 ```
 
 Teste o login:
@@ -122,10 +123,10 @@ No seu app Expo/React Native, atualize a URL base da API:
 
 ```typescript
 // De:
-const API_URL = 'http://localhost:3000';
+const API_URL = "http://localhost:3000";
 
 // Para:
-const API_URL = 'https://api.seudominio.com';
+const API_URL = "https://api.seudominio.com";
 ```
 
 > 💡 Use variáveis de ambiente do Expo (`EXPO_PUBLIC_API_URL`) para alternar entre dev e prod.
@@ -156,10 +157,10 @@ O deploy começa automaticamente em ~30 segundos.
 
 ## Custos estimados (Railway)
 
-| Recurso | Custo |
-|---|---|
-| **Hobby Plan** | $5/mês (inclui $5 de créditos de uso) |
-| **Uso típico** (API leve) | ~$2-5/mês |
-| **Free Trial** | 500 horas gratuitas no primeiro mês |
+| Recurso                   | Custo                                 |
+| ------------------------- | ------------------------------------- |
+| **Hobby Plan**            | $5/mês (inclui $5 de créditos de uso) |
+| **Uso típico** (API leve) | ~$2-5/mês                             |
+| **Free Trial**            | 500 horas gratuitas no primeiro mês   |
 
 > O Railway cobra por uso (CPU + memória + rede). Um backend Express leve como este consome muito pouco.
